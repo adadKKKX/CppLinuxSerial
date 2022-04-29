@@ -166,7 +166,8 @@ namespace mn {
             /// \param      wait_ms     The amount of time to wait for data. Set to 0 for non-blocking mode. Set to -1
             ///                 to wait indefinitely for new data.
             /// \throws		CppLinuxSerial::Exception if state != OPEN.
-            void ReadBinary(std::vector<uint8_t>& data);
+            //void ReadBinary(std::vector<uint8_t>& data);
+            void ReadBinary(std::vector<uint8_t>& data,size_t uReadSize = 0);
 
 			/// \brief		Use to get number of bytes available in receive buffer.
             /// \returns    The number of bytes available in the receive buffer (ready to be read).

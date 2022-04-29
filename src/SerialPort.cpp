@@ -522,8 +522,8 @@ namespace CppLinuxSerial {
 
 		// If code reaches here, read must of been successful
 	}
-
-	void SerialPort::ReadBinary(std::vector<uint8_t>& data)
+	
+	void SerialPort::ReadBinary(std::vector<uint8_t>& data,size_t uReadSize)
 	{
         data.clear();
 
@@ -537,6 +537,21 @@ namespace CppLinuxSerial {
         // We provide the underlying raw array from the readBuffer_ vector to this C api.
         // This will work because we do not delete/resize the vector while this method
         // is called
+		size_t readsize = 0;
+
+		if(uReadSize==0)
+		{
+				readsize = readBufferSize_B_;
+		}
+		else if(uReadSize > readBufferSize_B_)
+		{
+			readsize = readBufferSize_B_;
+		}
+		else
+		{
+			readsize = 1;
+		}
+		
 		ssize_t n = read(fileDesc_, &readBuffer_[0], readBufferSize_B_);
 
 		// Error Handling
